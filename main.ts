@@ -1,10 +1,13 @@
-import { mkdirSync, writeFileSync } from "fs";
-import { join } from "path";
+import { writeFileSync, mkdirSync, existsSync } from 'fs';
+import { join } from 'path';
 
-const outputDir = process.env.MAKEFUN_OUTPUT_DIR || "/output";
-mkdirSync(outputDir, { recursive: true });
+const outputDir = process.env.MAKEFUN_OUTPUT_DIR || '/output';
+const entryPath = join(outputDir, 'entry.txt');
 
-const entryPath = join(outputDir, "entry.txt");
-const warning = "WARNING: Surface may be hot. Do not confirm this with your tongue.";
-writeFileSync(entryPath, warning, { encoding: "utf8", flag: "w" });
+if (!existsSync(outputDir)) {
+  mkdirSync(outputDir, { recursive: true });
+}
+
+const text = 'WARNING: Turning this dial will not heat the room faster. It only makes you feel useful.';
+writeFileSync(entryPath, text, 'utf8');
 // Revised after local test
